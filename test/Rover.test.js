@@ -1,4 +1,5 @@
 const Rover = require('../src/Rover')
+const Tableau = require('../src/Tableau')
 
 test('when input "L" cardinal should spin to the 90 degrees cardinal anticlockwise ', () => {
     const rover = new Rover()
@@ -73,34 +74,34 @@ test('"M" means move forward one grid point, and maintain the same heading.', ()
 })
 
 test("getInputStringType determines the step", () => {
-    const rover = new Rover()
-    expect(rover.getInputStringType("")).toBe(false)
-    expect(rover.getInputStringType()).toBe(false)
+    const tableau = new Tableau()
+    expect(tableau.getInputStringType("")).toBe(false)
+    expect(tableau.getInputStringType()).toBe(false)
 
-    expect(rover.getInputStringType("RRMM")).toBe("movements")
+    expect(tableau.getInputStringType("RRMM")).toBe("movements")
 
-    expect(rover.getInputStringType("4 8")).toBe("firstStep")
-    expect(rover.getInputStringType("12 12")).toBe("firstStep")
-    expect(rover.getInputStringType("-4 8")).toBe("firstStep")
-    expect(rover.getInputStringType("-4 -80")).toBe("firstStep")
+    expect(tableau.getInputStringType("4 8")).toBe("firstStep")
+    expect(tableau.getInputStringType("12 12")).toBe("firstStep")
+    expect(tableau.getInputStringType("-4 8")).toBe("firstStep")
+    expect(tableau.getInputStringType("-4 -80")).toBe("firstStep")
 
-    expect(rover.getInputStringType("800")).toBe(false)
-    expect(rover.getInputStringType("-666")).toBe(false)
-    expect(rover.getInputStringType("0")).toBe(false)
-    expect(rover.getInputStringType("something something")).toBe(false)
+    expect(tableau.getInputStringType("800")).toBe(false)
+    expect(tableau.getInputStringType("-666")).toBe(false)
+    expect(tableau.getInputStringType("0")).toBe(false)
+    expect(tableau.getInputStringType("something something")).toBe(false)
 
-    expect(rover.getInputStringType("4 8 N")).toBe("secondStep")
-    expect(rover.getInputStringType("-4 -8 E")).toBe("secondStep")
-    expect(rover.getInputStringType("400 -8 W")).toBe("secondStep")
-    expect(rover.getInputStringType("400 -8 S")).toBe("secondStep")
+    expect(tableau.getInputStringType("4 8 N")).toBe("secondStep")
+    expect(tableau.getInputStringType("-4 -8 E")).toBe("secondStep")
+    expect(tableau.getInputStringType("400 -8 W")).toBe("secondStep")
+    expect(tableau.getInputStringType("400 -8 S")).toBe("secondStep")
 
-    expect(rover.getInputStringType("400 -8 G")).toBe(false)
-    expect(rover.getInputStringType("400 -8 23423 W")).toBe(false)
-    expect(rover.getInputStringType("E -8 23423")).toBe(false)
+    expect(tableau.getInputStringType("400 -8 G")).toBe(false)
+    expect(tableau.getInputStringType("400 -8 23423 W")).toBe(false)
+    expect(tableau.getInputStringType("E -8 23423")).toBe(false)
 })
 
 test.skip("A string with two coordinates separated by space set the first sequencial movement", () => {
-    const rover = new Rover()
+    const tableau = new Rover()
     expect(rover.step).toBe(0)
     rover.move('1 1')
     expect(rover.step).toBe(1)
