@@ -127,16 +127,40 @@ test('The fisrt input define tableau dimensions', () => {
     expect(tableau.yMax).toBe(80)
 })
 
+test('any instruction is accepted if dimensions are not set', () => {
+    const tableau = new Tableau()
+    tableau.instruction('ANY FIRST INSTRUCTION WHICH IS NOT DIMENSIONS')
+    expect(tableau.instruction('10 10')).toBe(false)
+    expect(tableau.xMax).toBeFalsy()
+    expect(tableau.xMax).toBeFalsy()
+    
+})
 
 test("An input string of two coordinates and facing separated by space do NOT SELECT rover if does not exists", () => {
     const tableau = new Tableau()
+    tableau.instruction('20 20')
     tableau.instruction('1 1 N')
     expect(tableau.idSelected).toBe(null)
 })
 
 test("An input string of two coordinates and facing separated by space SELECT rover if exists", () => {
     const tableau = new Tableau()
+    tableau.instruction('20 20')
     tableau.createRover("testId_01", 1, 1)
     tableau.instruction('1 1 N')
     expect(tableau.idSelected).toBe("testId_01")
+})
+
+test("select the rover and move it ", () => {
+    const tableau = new Tableau()
+    tableau.instruction('20 20')
+    tableau.createRover("testId_01", 1, 1)
+    tableau.instruction('1 1 N')
+    tableau.instruction('MRML')
+
+    expect(tableau.idSelected).toBe("testId_01")
+    const selectedRover = tableau.rovers.find(rover => rover.id===tableau.idSelected)
+    expect(selectedRover.x).toBe(2)
+    expect(selectedRover.y).toBe(2)
+    expect(selectedRover.heading).toBe("N")
 })

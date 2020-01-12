@@ -5,11 +5,11 @@ const cardinals = require('./utils/cardinals')
 
 class Tableau {
     constructor() {
-        this.queue = []
         this.rovers = []
         this.xMax = null
         this.yMax = null
         this.firstInstruction = true
+        this.idSelected = null
     }
 
     setTableauDimensions(inputString) {
@@ -36,7 +36,7 @@ class Tableau {
 
     isStringTypeSelect(inputString) {
         const inputArr = inputString.split(" ")
-        if(inputArr.length!=3) return false
+        if(!inputArr.length===3) return false
         if(isNaN(inputArr[0])) return false
         if(isNaN(inputArr[1])) return false
         if(inputArr[0]<0) return false
@@ -61,7 +61,7 @@ class Tableau {
         if(this.isStringTypeSetDimensions(inputString)) return "tableauSetDimensions"
         if(this.isStringTypeSelect(inputString)) return "roverSelect"
         if(/^[L|M|R]*$/.test(inputString)) return "roverSpinMove"
-        if(this.isStringTypeMove(inputString)) return "roverMove"
+        // if(this.isStringTypeMove(inputString)) return "roverMove"
         return false
     }
 
@@ -72,18 +72,23 @@ class Tableau {
         this.idSelected = (rover && rover.id) ? rover.id : null
     }
 
-    moveRover(inputString) {
+    spinAndMove(inputString) {
+        console.log(inputString)
+        this.rovers.find(rover => rover.id===this.idSelected).spinAndMove(inputString)
+    }
 
+    firstMovement(input, inputType) {
+        if(this.firstInstruction && inputType==="tableauSetDimensions") this.setTableauDimensions(input)
+        this.firstInstruction = false
     }
 
     instruction(input) {
         if(!isString(input)) return
         const inputType = this.getInputStringType(input)
-        if(this.firstInstruction && inputType==="tableauSetDimensions") this.setTableauDimensions(input)
-        this.firstInstruction = false
+        this.firstMovement(input, inputType)
+        if(this.xMax===null && this.yMax===null) return false
         if(inputType==="roverSelect") this.selectRover(input)
         if(inputType==="roverSpinMove") this.spinAndMove(input)
-        this.queue.push(input) //TODO : the queue will be used later
     }
 }
 
