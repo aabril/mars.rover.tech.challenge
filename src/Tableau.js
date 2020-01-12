@@ -49,7 +49,7 @@ class Tableau {
         const x = parseInt(inputString.split(" ")[0])
         const y = parseInt(inputString.split(" ")[1])
         const rover = this.rovers.find(rover => (rover.x === x) && (rover.y === y))
-        this.idSelected = rover.id
+        this.idSelected = (rover && rover.id) ? rover.id : null
     }
 
     instruction(input) {
