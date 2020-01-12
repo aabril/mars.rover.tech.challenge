@@ -38,7 +38,10 @@ class Rover {
     }
 
     moveForward() {
-        this.y = this.y + 1
+        if(this.heading==="N") this.y = this.y + 1
+        if(this.heading==="E") this.x = this.x + 1
+        if(this.heading==="S") this.y = this.y - 1
+        if(this.heading==="W") this.x = this.x - 1
     }
 
     move(inputString) {
