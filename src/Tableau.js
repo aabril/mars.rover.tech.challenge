@@ -16,14 +16,14 @@ class Tableau {
         this.rovers.push(newRover)
     }
 
-    isStringTypeFirst(inputString) {
+    isStringTypeSelect(inputString) {
         if(inputString.split(" ").length!=2) return false
         if(isNaN(inputString.split(" ")[0])) return false
         if(isNaN(inputString.split(" ")[1])) return false
         return true
     }
 
-    isStringTypeSecond(inputString) {
+    isStringTypeMove(inputString) {
         if(inputString.split(" ").length!=3) return false
         if(isNaN(inputString.split(" ")[0])) return false
         if(isNaN(inputString.split(" ")[1])) return false
@@ -33,19 +33,26 @@ class Tableau {
 
     getInputStringType(inputString) {
         if(!inputString) return false
-        if(/^[L|M|R]*$/.test(inputString)) return "movements"
-        if(this.isStringTypeFirst(inputString)) return "firstStep"
-        if(this.isStringTypeSecond(inputString)) return "secondStep"
+        if(/^[L|M|R]*$/.test(inputString)) return "roverSpinMove"
+        if(this.isStringTypeSelect(inputString)) return "roverSelect"
+        if(this.isStringTypeMove(inputString)) return "roverMove"
         return false
+    }
+
+    selectRover(inputString) {
+        const x = parseInt(inputString.split(" ")[0])
+        const y = parseInt(inputString.split(" ")[1])
+        const rover = this.rovers.find(rover => (rover.x === x) && (rover.y === y))
+        this.idSelected = rover.id
     }
 
     instruction(input) {
         if(!isString(input)) return
         const inputType = this.getInputStringType(input)
         if(inputType==="movements") this.spinAndMove(input)
-        // if(inputType==="firstStep") this.selectRobot()
-        // if(inputType==="secondStep") this.s
-        this.queue.push(input)
+        if(inputType==="roverSelect") this.selectRover(input)
+        // if(inputType==="secondStep") this.moveRover()
+        this.queue.push(input) //TODO : the queue will be used later
     }
 }
 

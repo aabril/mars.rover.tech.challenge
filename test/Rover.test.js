@@ -78,31 +78,31 @@ test("getInputStringType determines the step", () => {
     expect(tableau.getInputStringType("")).toBe(false)
     expect(tableau.getInputStringType()).toBe(false)
 
-    expect(tableau.getInputStringType("RRMM")).toBe("movements")
+    expect(tableau.getInputStringType("RRMM")).toBe("roverSpinMove")
 
-    expect(tableau.getInputStringType("4 8")).toBe("firstStep")
-    expect(tableau.getInputStringType("12 12")).toBe("firstStep")
-    expect(tableau.getInputStringType("-4 8")).toBe("firstStep")
-    expect(tableau.getInputStringType("-4 -80")).toBe("firstStep")
+    expect(tableau.getInputStringType("4 8")).toBe("roverSelect")
+    expect(tableau.getInputStringType("12 12")).toBe("roverSelect")
+    expect(tableau.getInputStringType("-4 8")).toBe("roverSelect")
+    expect(tableau.getInputStringType("-4 -80")).toBe("roverSelect")
 
     expect(tableau.getInputStringType("800")).toBe(false)
     expect(tableau.getInputStringType("-666")).toBe(false)
     expect(tableau.getInputStringType("0")).toBe(false)
     expect(tableau.getInputStringType("something something")).toBe(false)
 
-    expect(tableau.getInputStringType("4 8 N")).toBe("secondStep")
-    expect(tableau.getInputStringType("-4 -8 E")).toBe("secondStep")
-    expect(tableau.getInputStringType("400 -8 W")).toBe("secondStep")
-    expect(tableau.getInputStringType("400 -8 S")).toBe("secondStep")
+    expect(tableau.getInputStringType("4 8 N")).toBe("roverMove")
+    expect(tableau.getInputStringType("-4 -8 E")).toBe("roverMove")
+    expect(tableau.getInputStringType("400 -8 W")).toBe("roverMove")
+    expect(tableau.getInputStringType("400 -8 S")).toBe("roverMove")
 
     expect(tableau.getInputStringType("400 -8 G")).toBe(false)
     expect(tableau.getInputStringType("400 -8 23423 W")).toBe(false)
     expect(tableau.getInputStringType("E -8 23423")).toBe(false)
 })
 
-test.skip("A string with two coordinates separated by space set the first sequencial movement", () => {
-    const tableau = new Rover()
-    expect(rover.step).toBe(0)
-    rover.move('1 1')
-    expect(rover.step).toBe(1)
+test("A string with two coordinates separated by space set rover to be moved on the tableau", () => {
+    const tableau = new Tableau()
+    tableau.createRover("test_01", 1, 1)
+    tableau.instruction('1 1')
+    expect(tableau.idSelected).toBe("test_01")
 })
