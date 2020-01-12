@@ -15,7 +15,7 @@ class Rover {
         }
     }
 
-    moveAntiClockwise() {
+    spinAntiClockwise() {
         const currentIndex = cardinals.indexOf(this.heading)
 
         const isTheFirstItem = (currentIndex === 0)
@@ -26,7 +26,7 @@ class Rover {
         this.heading = previousCardinal
     }
 
-    moveClockwise() {
+    spinClockwise() {
         const currentIndex = cardinals.indexOf(this.heading)
             
         const isTheLastItem = (cardinals.length-1 === currentIndex)
@@ -39,8 +39,8 @@ class Rover {
 
     move(inputString) {
         inputString.split('').map(char => {
-            if(char==="L") this.moveAntiClockwise()
-            if(char==="R") this.moveClockwise()
+            if(char==="L") this.spinAntiClockwise()
+            if(char==="R") this.spinClockwise()
         })
     }
 }
