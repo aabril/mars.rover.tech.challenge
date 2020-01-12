@@ -14,7 +14,13 @@ class Rover {
     }
 
     move(inputString) {
-        if(inputString==="L") this.heading = "W"
+        const cardinals = [ "N", "E", "S", "W" ]
+
+        if(inputString==="L"){
+            const currentIndex = cardinals.indexOf(this.heading)
+            const previousCardinal = (currentIndex === 0) ? cardinals[cardinals.length-1] : cardinals[currentIndex-1]
+            this.heading = previousCardinal
+        }
     }
 }
 
