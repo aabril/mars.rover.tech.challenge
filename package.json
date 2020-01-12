@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Albert Abril <albert@Alberts-MacBook-Pro.local>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll ./test"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
