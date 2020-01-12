@@ -73,36 +73,53 @@ test('"M" means move forward one grid point, and maintain the same heading.', ()
     expect(rover.getPosition.y).toBe(1) 
 })
 
-test("getInputStringType determines the step", () => {
+test("getInputStringType have false by defauot", () => {
     const tableau = new Tableau()
     expect(tableau.getInputStringType("")).toBe(false)
     expect(tableau.getInputStringType()).toBe(false)
+})
 
+test("getInputStringType detects type spin", () => {
+    const tableau = new Tableau()
     expect(tableau.getInputStringType("RRMM")).toBe("roverSpinMove")
+})
 
+test("getInputStringType detects selection", () => {
+    const tableau = new Tableau()
     expect(tableau.getInputStringType("4 8")).toBe("roverSelect")
     expect(tableau.getInputStringType("12 12")).toBe("roverSelect")
+})
+
+test("getInputStringType detects move", () => {
+    const tableau = new Tableau()
+    expect(tableau.getInputStringType("4 8 N")).toBe("roverMove")
+})
+
+test("getInputStringType rejects any negative or unformatted input", () => {
+    const tableau = new Tableau()
     expect(tableau.getInputStringType("-4 8")).toBe(false)
     expect(tableau.getInputStringType("-4 -80")).toBe(false)
-
-    expect(tableau.getInputStringType("800")).toBe(false)
     expect(tableau.getInputStringType("-666")).toBe(false)
-    expect(tableau.getInputStringType("0")).toBe(false)
-    expect(tableau.getInputStringType("something something")).toBe(false)
-
-    expect(tableau.getInputStringType("4 8 N")).toBe("roverMove")
     expect(tableau.getInputStringType("-4 -8 E")).toBe(false)
     expect(tableau.getInputStringType("400 -8 W")).toBe(false)
     expect(tableau.getInputStringType("400 -8 S")).toBe(false)
-
     expect(tableau.getInputStringType("400 -8 G")).toBe(false)
     expect(tableau.getInputStringType("400 -8 23423 W")).toBe(false)
     expect(tableau.getInputStringType("E -8 23423")).toBe(false)
+    expect(tableau.getInputStringType("800")).toBe(false)
+    expect(tableau.getInputStringType("0")).toBe(false)
+    expect(tableau.getInputStringType("something something")).toBe(false)
 })
 
-test("A string with two coordinates separated by space set rover to be moved on the tableau", () => {
+test("An input string of two coordinates separated by space do NOT SELECT rover if does not exists", () => {
     const tableau = new Tableau()
-    tableau.createRover("test_01", 1, 1)
     tableau.instruction('1 1')
-    expect(tableau.idSelected).toBe("test_01")
+    expect(tableau.idSelected).toBe(null)
+})
+
+test("An input string of two coordinates separated by space SELECT rover if exists", () => {
+    const tableau = new Tableau()
+    tableau.createRover("testId_01", 1, 1)
+    tableau.instruction('1 1')
+    expect(tableau.idSelected).toBe("testId_01")
 })
