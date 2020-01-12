@@ -49,3 +49,15 @@ test('when input either "R" or "L", spin correctly as expected', () => {
     rover.move('R')
     expect(rover.getPosition.heading).toBe("E")    
 })
+
+test('when input is a sequence of "R"s and "L"s should face the correct cardinal direction', () => {
+    const rover = new Rover()
+    rover.move('RLLLRLLRLLLL')
+    expect(rover.getPosition.heading).toBe("S") 
+    rover.move('LL')
+    expect(rover.getPosition.heading).toBe("N") 
+    rover.move('RLRLRLRLRL')
+    expect(rover.getPosition.heading).toBe("N") 
+    rover.move('RLRLRLRLRLRRR')
+    expect(rover.getPosition.heading).toBe("W") 
+})

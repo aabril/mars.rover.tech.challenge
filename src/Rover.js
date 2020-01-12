@@ -40,6 +40,12 @@ class Rover {
     move(inputString) {
         if(inputString==="L") this.moveAntiClockwise()
         if(inputString==="R") this.moveClockwise()
+        if(inputString.length>1) {
+            inputString.split('').map(char => {
+                if(char==="L") this.moveAntiClockwise()
+                if(char==="R") this.moveClockwise()
+            })
+        }
     }
 }
 
