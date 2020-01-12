@@ -61,3 +61,10 @@ test('when input is a sequence of "R"s and "L"s should face the correct cardinal
     rover.move('RLRLRLRLRLRRR')
     expect(rover.getPosition.heading).toBe("W") 
 })
+
+test('"M" means move forward one grid point, and maintain the same heading.', () => {
+    const rover = new Rover()
+    rover.move('M')
+    expect(rover.getPosition.x).toBe(0)
+    expect(rover.getPosition.y).toBe(1) 
+})
