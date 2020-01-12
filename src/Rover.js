@@ -1,10 +1,11 @@
 const cardinals = [ "N", "E", "S", "W" ]
 
 class Rover {
-    constructor() {
+    constructor(id, x, y) {
+        this.id = id
         this.heading = "N" // N, S, E, W : North, South, East, West
-        this.x = 0
-        this.y = 0
+        this.x = x || 0
+        this.y = y || 0
         this.previousStep = 0
     }
 
