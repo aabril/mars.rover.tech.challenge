@@ -17,17 +17,23 @@ class Tableau {
     }
 
     isStringTypeSelect(inputString) {
-        if(inputString.split(" ").length!=2) return false
-        if(isNaN(inputString.split(" ")[0])) return false
-        if(isNaN(inputString.split(" ")[1])) return false
+        const inputArr = inputString.split(" ")
+        if(inputArr.length!=2) return false
+        if(isNaN(inputArr[0])) return false
+        if(isNaN(inputArr[1])) return false
+        if(inputArr[0]<0) return false
+        if(inputArr[1]<0) return false
         return true
     }
 
     isStringTypeMove(inputString) {
-        if(inputString.split(" ").length!=3) return false
-        if(isNaN(inputString.split(" ")[0])) return false
-        if(isNaN(inputString.split(" ")[1])) return false
-        if(!(cardinals.includes(inputString.split(" ")[2]))) return false 
+        const inputArr = inputString.split(" ")
+        if(inputArr.length!=3) return false
+        if(isNaN(inputArr[0])) return false
+        if(isNaN(inputArr[1])) return false
+        if(inputArr[0]<0) return false
+        if(inputArr[1]<0) return false
+        if(!(cardinals.includes(inputArr[2]))) return false 
         return true
     }
 

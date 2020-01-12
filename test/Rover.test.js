@@ -82,8 +82,8 @@ test("getInputStringType determines the step", () => {
 
     expect(tableau.getInputStringType("4 8")).toBe("roverSelect")
     expect(tableau.getInputStringType("12 12")).toBe("roverSelect")
-    expect(tableau.getInputStringType("-4 8")).toBe("roverSelect")
-    expect(tableau.getInputStringType("-4 -80")).toBe("roverSelect")
+    expect(tableau.getInputStringType("-4 8")).toBe(false)
+    expect(tableau.getInputStringType("-4 -80")).toBe(false)
 
     expect(tableau.getInputStringType("800")).toBe(false)
     expect(tableau.getInputStringType("-666")).toBe(false)
@@ -91,9 +91,9 @@ test("getInputStringType determines the step", () => {
     expect(tableau.getInputStringType("something something")).toBe(false)
 
     expect(tableau.getInputStringType("4 8 N")).toBe("roverMove")
-    expect(tableau.getInputStringType("-4 -8 E")).toBe("roverMove")
-    expect(tableau.getInputStringType("400 -8 W")).toBe("roverMove")
-    expect(tableau.getInputStringType("400 -8 S")).toBe("roverMove")
+    expect(tableau.getInputStringType("-4 -8 E")).toBe(false)
+    expect(tableau.getInputStringType("400 -8 W")).toBe(false)
+    expect(tableau.getInputStringType("400 -8 S")).toBe(false)
 
     expect(tableau.getInputStringType("400 -8 G")).toBe(false)
     expect(tableau.getInputStringType("400 -8 23423 W")).toBe(false)
