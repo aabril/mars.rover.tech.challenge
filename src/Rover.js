@@ -37,10 +37,15 @@ class Rover {
         this.heading = nextCardinal
     }
 
+    moveForward() {
+        this.y = this.y + 1
+    }
+
     move(inputString) {
         inputString.split('').map(char => {
             if(char==="L") this.spinAntiClockwise()
             if(char==="R") this.spinClockwise()
+            if(char==="M") this.moveForward()
         })
     }
 }
