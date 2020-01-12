@@ -1,3 +1,5 @@
+const cardinals = [ "N", "E", "S", "W" ]
+
 class Rover {
     constructor() {
         this.heading = "N" // N, S, E, W : North, South, East, West
@@ -13,33 +15,31 @@ class Rover {
         }
     }
 
-    move(inputString) {
-        const cardinals = [ "N", "E", "S", "W" ]
+    moveAntiClockwise() {
+        const currentIndex = cardinals.indexOf(this.heading)
 
-        if(inputString==="L"){
-            const currentIndex = cardinals.indexOf(this.heading)
+        const isTheFirstItem = (currentIndex === 0)
+        const lastItem = cardinals[cardinals.length-1]
+        const previousItem = cardinals[currentIndex-1]
 
-            const isTheFirstItem = (currentIndex === 0)
-            const lastItem = cardinals[cardinals.length-1]
-            const previousItem = cardinals[currentIndex-1]
+        const previousCardinal = (isTheFirstItem) ? lastItem : previousItem
+        this.heading = previousCardinal
+    }
 
-            const previousCardinal = (isTheFirstItem) ? lastItem : previousItem
-            this.heading = previousCardinal
-        }
-
-        if(inputString==="R"){
-            const currentIndex = cardinals.indexOf(this.heading)
+    moveClockwise() {
+        const currentIndex = cardinals.indexOf(this.heading)
             
-            const isTheLastItem = (cardinals.length-1 === currentIndex)
-            const firstItem = cardinals[0]
-            const nextItem = cardinals[currentIndex+1]
+        const isTheLastItem = (cardinals.length-1 === currentIndex)
+        const firstItem = cardinals[0]
+        const nextItem = cardinals[currentIndex+1]
 
-            const nextCardinal = (isTheLastItem) ? firstItem : nextItem
-            this.heading = nextCardinal
-        }
+        const nextCardinal = (isTheLastItem) ? firstItem : nextItem
+        this.heading = nextCardinal
+    }
 
-
-
+    move(inputString) {
+        if(inputString==="L") this.moveAntiClockwise()
+        if(inputString==="R") this.moveClockwise()
     }
 }
 
