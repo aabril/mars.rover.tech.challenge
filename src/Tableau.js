@@ -61,7 +61,6 @@ class Tableau {
         if(this.isStringTypeSetDimensions(inputString)) return "tableauSetDimensions"
         if(this.isStringTypeSelect(inputString)) return "roverSelect"
         if(/^[L|M|R]*$/.test(inputString)) return "roverSpinMove"
-        // if(this.isStringTypeMove(inputString)) return "roverMove"
         return false
     }
 
@@ -73,7 +72,6 @@ class Tableau {
     }
 
     spinAndMove(inputString) {
-        console.log(inputString)
         this.rovers.find(rover => rover.id===this.idSelected).spinAndMove(inputString)
     }
 
